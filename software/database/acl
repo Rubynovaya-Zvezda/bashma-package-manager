@@ -1,0 +1,18 @@
+#!/bin/bash
+
+implemented=false
+blank=true
+url=""
+deps=""
+description=""
+version="latest"
+
+instal_algo()
+{
+	 echo "Here should be actual installation logic"
+}
+
+remove_algo()
+{
+	echo "Here should be actual removal logic"
+}

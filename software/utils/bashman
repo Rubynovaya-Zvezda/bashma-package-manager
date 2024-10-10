@@ -1,0 +1,28 @@
+#!/bin/bash
+name=$(basename ${2})
+# dir=/var
+dir=/home/danila/Projects/marble-os
+workspace=$dir/software/
+
+
+
+case $1 in
+	install)
+		source $workspace/utils/origin "${2}"
+		instal
+		source $workspace/utils/zero
+	;;
+	remove)
+		source $workspace/utils/origin "${2}"
+		remove
+		source $workspace/utils/zero
+	;;
+	search)
+		echo "FUNCTION NOT IMPLEMENTED EXCEPTION."
+		exit 1;
+	;;
+	*)
+		echo "UNKNOWN OPTION."
+		exit 1;
+	;;
+esac

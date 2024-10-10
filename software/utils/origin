@@ -1,0 +1,88 @@
+#!/bin/bash
+name=${1}
+# dir=/var
+dir=/home/danila/Projects/marble-os
+workspace=$dir/software
+cache=$dir/cache/software/
+
+implemented=false
+blank=true
+url=""
+deps=""
+description=""
+version=""
+
+source $workspace/database/${name}
+
+installed=$(test -e $workspace/installed/$name && echo true || echo false)
+
+
+
+instal_deps ()
+{
+	if [ -nz $deps ]; then
+		echo "installing dependencies ..."
+		for n in ${deps}; do 
+			if [ $(test -e $workspace/installed/$n && echo true || echo false) = false ]; then
+				echo "$n not installed - installing..."
+				app install $n 
+			fi; 
+		done
+		echo "depenencies installed"
+	fi
+}
+
+
+run_checks ()
+{	
+	if [ $installed = true ]; then
+		echo "package is already installed"
+		exit 0
+	fi
+	
+	echo "running checks ..."
+
+	mkdir -p $cache
+	mkdir -p $cache/${name}
+
+	if [ $implemented = false ]; then 
+		echo "NOT IMPLEMENTED EXCEPTION: package $name not implemented yet"		
+		echo "Implement: $name" >> $workspace/TODO
+		exit 1
+	fi
+
+	if [ $blank = true ]; then 
+		echo "blank packages do not get installed."		
+		exit 1
+	fi
+	
+	echo "checks complete."
+}
+
+instal ()
+{
+	echo "installing ..."
+	d=${PWD}
+	run_checks
+	cd ${cache}
+	instal_deps
+	instal_algo
+	
+	touch $workspace/installed/$name
+	echo "installation-date=$(date)" > $workspace/installed/$name
+	echo "dependencies=$deps" >> $workspace/installed/$name
+	echo "description=$description" >> $workspace/installed/$name
+	echo "version=$version" >> $workspace/installed/$name
+	# echo all owned files on filesystem;
+			
+	echo "installation complete."
+	cd ${d}
+}
+
+remove()
+{
+	echo "removing package"
+	remove_algo
+	rm -f $workspace/installed/$name
+	echo "complete"
+}
