@@ -1,0 +1,42 @@
+#!/bin/bash
+name=${1}
+# dir=/var
+dir=/home/danila/Projects/marble-os
+workspace=$dir/software
+cache=""
+database=$workspace/database
+origin=$workspace/utils/origin
+zero=$workspace/utils/zero
+
+implemented=""
+blank=""
+url=""
+deps=""
+description=""
+version=""
+installed=""
+
+instal_deps ()
+{
+ 	exit 0
+}
+run_checks ()
+{
+ 	exit 0
+}
+instal_algo ()
+{
+ 	exit 0
+}
+instal ()
+{
+ 	exit 0
+}
+remove_algo ()
+{
+ 	exit 0
+}
+remove ()
+{
+ 	exit 0
+}
